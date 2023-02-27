@@ -25,7 +25,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return view('dashboard');
     })->name('dashboard');
 
-    Route::get('/table-data', DataControllers::class)->middleware(['throttle:external'])->name('table-data');
+    Route::get('/table-data', DataControllers::class)->name('table-data');
 });
 
 

@@ -21,6 +21,13 @@
                 <div class="p-6">
                     <table class="items-center bg-transparent w-full border-collapse " id="data-table">
                         <thead>
+                            <tr>
+                                <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">ID</th>
+                                <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">First Name</th>
+                                <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">Last Name</th>
+                                <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">Email</th>
+                                <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">Date</th>
+                            </tr>
                         </thead>
                         <tbody>
                         </tbody>
@@ -47,19 +54,17 @@
 
         function emptyDataTable() {
             const datatableEl = getDataTable();
-            datatableEl.getElementsByTagName('thead')[0].innerHTML = '';
             datatableEl.getElementsByTagName('tbody')[0].innerHTML = '';
         }
 
         async function populateDataTable() {
             const datatableEl = getDataTable();
             const datatableData = await fetchTableData();
-            const rows = Object.values(datatableData.data.rows).map(row => Object.values(row));
+            console.log(datatableData.data);
+            const rows = Object.values(datatableData.data).map(row => Object.values(row));
             console.log(rows);
 
-            const datatableHeaders = createTableHeaders(datatableData.data.headers);
             const datatableBody = populateTableRow(rows);
-            datatableEl.getElementsByTagName('thead')[0].innerHTML = datatableHeaders;
             datatableEl.getElementsByTagName('tbody')[0].innerHTML = datatableBody;
         }
 
@@ -69,22 +74,6 @@
 
         function getDataTable() {
             return document.getElementById('data-table');
-        }
-
-        function createTableHeaders(headers) {
-            function getTableHeadTemplate(head_value) {
-                return [
-                    '<th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">',
-                    head_value,
-                    '</th>'
-                ].join('');
-            }
-            let headers_template = headers.map((head) => getTableHeadTemplate(head));
-            return [
-                '<tr>',
-                    headers_template.join(''),
-                '</tr>'
-            ].join('');
         }
 
         function populateTableRow(rows) {

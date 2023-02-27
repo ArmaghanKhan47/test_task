@@ -12,3 +12,5 @@ The datatable on this page has a refresh button below it which will make an GET 
 ## /table-data API Endpoint
 This endpoint only can be used when user is logged in and thier email is verified. This api endpoint is also rate limited to only allow 1 request per 60 minutes per logged in user or ip address.
 This endpoint make GET request to external api endpoint to fetch results and return results.
+## php artisan xml:updateTable
+This command fetch data from api endpoint and store them in Data table.
